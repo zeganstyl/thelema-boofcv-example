@@ -1,0 +1,29 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+}
+
+group 'org.ksdfv.thelema'
+version '0.1'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "org.ksdfv.thelema:thelema-lwjgl3:0.5.0"
+    implementation "com.github.sarxos:webcam-capture:0.3.12"
+    implementation "org.boofcv:boofcv-core:0.36"
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'org.ksdfv.thelema.boofcv.Main'
+        )
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
